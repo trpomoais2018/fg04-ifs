@@ -8,7 +8,7 @@ class Pixels {
     this.pixelsCollection.push({ x: x, y: y });
   }
 
-  draw(image, size) {
+  drawDragonFractal(image, size) {
     if (this.pixelsCollection.length === 0) return;
     const maxX = this.max((p) => p.x);
     const maxY = this.max((p) => p.y);
@@ -63,7 +63,7 @@ class Pixels {
   }
 }
 
-function drawDragonFractal(image, size) {
+function getDragonFractal(image, size) {
   const iterCount = 100000;
   let x = 1.0;
   let x1 = 0.0;
@@ -71,8 +71,7 @@ function drawDragonFractal(image, size) {
   let y1 = 0.0;
   const angle45 = Math.PI / 4;
   const pixels = new Pixels();
-  for (let i = 0; i < iterCount; i++)
-  {
+  for (let i = 0; i < iterCount; i++) {
     const rnd = Math.random() > 0.5 ? 1 : 0;
     x1 = (x * Math.cos(angle45 + Math.PI / 2 * rnd)
       - y * Math.sin(angle45 + Math.PI / 2 * rnd)) / Math.sqrt(2) + 1 * rnd;
@@ -82,5 +81,5 @@ function drawDragonFractal(image, size) {
     y = y1;
     pixels.setPixel(x, y);
   }
-  return pixels.draw(image, size);
+  return pixels.drawDragonFractal(image, size);
 }

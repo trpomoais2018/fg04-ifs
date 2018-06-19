@@ -1,30 +1,28 @@
 <!doctype html>
 <html>
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="Cache-Control" content="no-cache"/>
+  <meta http-equiv="Cache-Control" content="no-cache" />
   <script type="text/javascript" src="DragonFractal.js"></script>
-	<script>
-		function example1() {
-			var canvas = document.getElementById("canvas1");
-			var canvasHeight = parseInt(canvas.getAttribute("height"));
-			var canvasWidth = parseInt(canvas.getAttribute("width"));
-			
-			//создаем 2d context
-			var context = canvas.getContext('2d');
-			
-			//создаем "буфер" imageData, в который будем класть новую информацию о цветах
-			var imageData = context.createImageData(canvasWidth, canvasHeight);
-      var size = {width : canvasWidth, height : canvasHeight};
-			context.putImageData(drawDragonFractal(imageData, size), 0, 0);
-		}
-		function run () {
-			example1();
-		}
-	</script>
+  <script>
+    function example1() {
+      var canvas = document.getElementById("canvas1");
+      var canvasHeight = parseInt(canvas.getAttribute("height"));
+      var canvasWidth = parseInt(canvas.getAttribute("width"));
+      var context = canvas.getContext('2d');
+      var imageData = context.createImageData(canvasWidth, canvasHeight);
+      var size = { width: canvasWidth, height: canvasHeight };
+      context.putImageData(getDragonFractal(imageData, size), 0, 0);
+    }
+    function run() {
+      example1();
+    }
+  </script>
 
-<body onload="run()">
-  <canvas height='400' width='400' id='canvas1'></canvas>
+  <body onload="run()">
+    <canvas height='400' width='400' id='canvas1'></canvas>
 
-</body>
+  </body>
+
 </html>
