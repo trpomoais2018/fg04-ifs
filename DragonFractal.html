@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script>
+        function makeFractal() {
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var imageData = context.createImageData(canvas.width, canvas.height);
+
+            for (var i = 0; i < canvas.width; i++) {
+                for (var j = 0; j < canvas.height; j++) {
+                    imageData.data[4 * (i + canvas.width * j) + 0] = 0;
+                    imageData.data[4 * (i + canvas.width * j) + 1] = 0;
+                    imageData.data[4 * (i + canvas.width * j) + 2] = 0;
+                    imageData.data[4 * (i + canvas.width * j) + 3] = 255;
+                }
+            }
+            fractal(imageData, 10000, 100, 100, canvas);
+            context.putImageData(imageData, 0, 0);
+        };
+
+        function fractal(imageData, n, x, y, canvas) {
+            for (var i = 0; i < n; ++i) {
+                var k = Math.random();
+                if (k < 0.5) {
+                    var newX = -0.5 * x - 0.5 * y;
+                    var newY = 0.5 * x - 0.5 * y;
+                } else {
+                    var newX = 0.5 * x - 0.5 * y + 1;
+                    var newY = 0.5 * x + 0.5 * y;
+                }
+                drawPoint(Math.round(100 * newX + canvas.width / 2), Math.round(100 * newY + canvas.height / 2), imageData, canvas);
+                x = newX;
+                y = newY;
+            }
+        }
+
+        function drawPoint(x1, y1, imageData, canvas) {
+            imageData.data[4 * (x1 + canvas.width * y1) + 0] = 255;
+            imageData.data[4 * (x1 + canvas.width * y1) + 1] = 255;
+            imageData.data[4 * (x1 + canvas.width * y1) + 2] = 255;
+            imageData.data[4 * (x1 + canvas.width * y1) + 3] = 0;
+        }
+    </script>
+</head>
+<body onload="makeFractal()">
+    <canvas height="500" width="500" id="canvas"></canvas>
+</body>
+</html>
